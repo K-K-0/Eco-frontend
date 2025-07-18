@@ -44,11 +44,13 @@ const Login = () => {
 
     return (
         
-        <div className="font-inter max-h-screen flex flex-col gap items-center justify-center">
+        <div className="font-inter min-h-screen flex flex-col items-center justify-center p-4">
+
             
             <section className="flex justify-center">
                  
-                <div className=" px-6 lg:px-8 absolute py-20 w-[500px] h-[500px] items-center">
+                <div className="flex items-center justify-center min-h-screen w-full px-4">
+
                     <div className=" max-h-screen rounded-2xl bg-[#f7f9f8] shadow-xl mt-30">
                         <form onSubmit={handleLogin} className="lg:p-11 p-7 mx-auto">
                             <div className="mb-11">
