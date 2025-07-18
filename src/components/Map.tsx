@@ -103,8 +103,37 @@ const Map = () => {
         if (!map.current || trees.length === 0) return;
 
         trees.forEach((tree) => {
-            // Custom HTML element for leafy emoji
-            const marker = new maplibregl.Marker({ color: "#10B981" })
+            const el = document.createElement("div");
+            el.innerHTML = "🌳";
+
+            Object.assign(el.style, {
+                fontSize: "24px",
+                width: "40px",
+                height: "40px",
+                textAlign: "center",
+                backgroundColor: "white",
+                borderRadius: "50%",
+                border: "2px solid #22c55e",
+                boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                transition: "transform 0.2s",
+                PointerEvents: "auto",
+            });
+
+            el.title = "Planted Tree 🌱";
+
+            el.addEventListener("mouseenter", () => {
+                el.style.transform = "scale(1.3)";
+            });
+
+            el.addEventListener("mouseleave", () => {
+                el.style.transform = "scale(1)";
+            });
+
+            new maplibregl.Marker({ element: el, anchor: "bottom" })
                 .setLngLat([tree.longitude, tree.latitude])
                 .addTo(map.current!);
         });
