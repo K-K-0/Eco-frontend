@@ -15,7 +15,7 @@ export default function Login() {
     const location = useLocation();
     const from = location.state?.from || "/dashboard";
 
-    const handleLogin = async (e) => {
+    const handleLogin = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         try {
             await loginUser(email, password);
