@@ -36,9 +36,9 @@ export default function Login() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="bg-white shadow-2xl rounded-2xl max-w-md w-full p-8 space-y-6"
+                className="bg-black shadow-2xl rounded-2xl max-w-md w-full p-8 space-y-6"
             >
-                <h2 className="text-3xl font-bold text-center text-gray-800">Welcome Back</h2>
+                <h2 className="text-3xl font-bold text-center text-white">Welcome Back</h2>
                 {error && <p className="text-red-500 text-sm text-center">{error}</p>}
                 <form onSubmit={handleLogin} className="space-y-4">
                     <div>
@@ -56,7 +56,7 @@ export default function Login() {
                         />
                     </div>
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                        <label htmlFor="password" className="block text-sm font-medium text-white">
                             Password
                         </label>
                         <input
@@ -76,7 +76,7 @@ export default function Login() {
                     </div>
                     <button
                         type="submit"
-                        className="w-full py-3 rounded-full bg-green-600 hover:bg-green-700 hover:cursor-pointer text-white font-semibold transition"
+                        className="w-full py-3 rounded-full bg-black hover:bg-green-700 hover:cursor-pointer text-white font-semibold transition"
                     >
                         Login
                     </button>
