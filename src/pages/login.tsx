@@ -1,92 +1,93 @@
-import React,{ useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { loginUser, getMe } from "../api/auth";
 import { useAuth } from "../context/AuthContext";
-import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
-
-const Login = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+export default function Login() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     const auth = useAuth();
-    if (!auth) {
-        throw new Error("AuthContext is undefined. Make sure your component is wrapped in AuthProvider.");
-    }
+    if (!auth) throw new Error("AuthContext is undefined. Wrap your app in AuthProvider.");
     const { setUser, setIsAuthenticated } = auth;
-    const [, setError] = useState('')
-    const navigate = useNavigate()
-    const location = useLocation()
-    const from = location.state?.from || "/dashboard"
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from || "/dashboard";
 
-
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault()
+    const handleLogin = async (e) => {
+        e.preventDefault();
         try {
-            await loginUser(email, password)
-        } catch (e) {
-            setError('Invalid credentials')
-            console.log(e)
-        }
-
-        try {
-            const res = await getMe()
-            console.log(res)
+            await loginUser(email, password);
+            const res = await getMe();
             setUser(res.data);
-            setIsAuthenticated(true)
-            navigate(from, { replace: true })
-            setError('')
-        } catch (error) {
-            setError("session fetch fails")
-            console.log(error)
+            setIsAuthenticated(true);
+            setError("");
+            navigate(from, { replace: true });
+        } catch (err) {
+            setError("Invalid credentials or session error.");
+            console.error(err);
         }
-    }
-
+    };
 
     return (
-        
-        <div className="font-inter min-h-screen flex flex-col items-center justify-center p-4">
-
-            
-            <section className="flex justify-center">
-                 
-                <div className="flex items-center justify-center min-h-screen w-full px-4">
-
-                    <div className=" max-h-screen rounded-2xl bg-[#f7f9f8] shadow-xl mt-30">
-                        <form onSubmit={handleLogin} className="lg:p-11 p-7 mx-auto">
-                            <div className="mb-11">
-                                <h1 className="text-[#002d1f] text-center font-manrope text-3xl font-bold leading-10 mb-2">Welcome Back</h1>
-                                <p className="text-[#002d1f] text-center text-base font-medium leading-6"></p>
-                            </div>
-
-                            
-                            <input type="text" placeholder="Email" className="w-full h-12 text-gray-900 placeholder:text-gray-400 
-                                text-lg font-normal leading-7 rounded-full border-gray-300 border shadow-sm focus:outline-none px-4 mb-6"
-                                value={email} onChange={(e) => setEmail(e.target.value)}
-                            /> 
-
-                            <input type="password" placeholder="Password" className="w-full h-12 text-gray-900 placeholder:text-gray-400
-                                text-lg font-normal leading-7 rounded-full border-gray-300 border shadow-sm focus:outline-none px-4 mb-1"
-                                value={password} onChange={(e) => setPassword(e.target.value)}
-                            />
-
-                            <a href="" className="flex justify-end mb-6">
-                                <span className="text-indigo-600 text-right text-base font-normal leading-6">Forgot Password?</span>
-                            </a>
-
-                            <button type="submit" className="w-full h-12 text-white text-center text-base font-semibold leading-6 cursor-pointer rounded-full hover:bg-lime-500 transition-all duration-700  bg-indigo-600 shadow-sm mb-11">Login</button>
-
-                            <Link to="/signup" className="flex justify-center text-gray-900 text-base font-medium leading-6">
-                                Don’t have an account?
-                                <span className="text-indigo-600 font-semibold pl-3"> Sign Up</span>
-                            </Link>
-
-                            
-                        </form>
+        <div className="min-h-screen bg-gradient-to-r from-green-50 to-blue-50 flex items-center justify-center p-4">
+            <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="bg-white shadow-2xl rounded-2xl max-w-md w-full p-8 space-y-6"
+            >
+                <h2 className="text-3xl font-bold text-center text-gray-800">Welcome Back</h2>
+                {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+                <form onSubmit={handleLogin} className="space-y-4">
+                    <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                            Email
+                        </label>
+                        <input
+                            id="email"
+                            type="email"
+                            required
+                            className="mt-1 block w-full px-4 py-2 rounded-full border border-gray-300 focus:ring-green-500 focus:border-green-500 outline-none"
+                            placeholder="you@example.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                     </div>
-                </div>
-            </section>
-        </div>        
-    )
+                    <div>
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                            Password
+                        </label>
+                        <input
+                            id="password"
+                            type="password"
+                            required
+                            className="mt-1 block w-full px-4 py-2 rounded-full border border-gray-300 focus:ring-green-500 focus:border-green-500 outline-none"
+                            placeholder="••••••••"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <div className="flex justify-end">
+                        <Link to="/forgot-password" className="text-sm text-green-600 hover:underline">
+                            Forgot Password?
+                        </Link>
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full py-3 rounded-full bg-green-600 hover:bg-green-700 text-white font-semibold transition"
+                    >
+                        Login
+                    </button>
+                </form>
+                <p className="text-center text-sm text-gray-600">
+                    Don’t have an account?{' '}
+                    <Link to="/signup" className="text-green-600 font-medium hover:underline">
+                        Sign Up
+                    </Link>
+                </p>
+            </motion.div>
+        </div>
+    );
 }
-
-export default Login
