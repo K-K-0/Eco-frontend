@@ -36,7 +36,7 @@ export default function Login() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="bg-zinc-600 shadow-2xl rounded-2xl max-w-md w-full p-8 space-y-6"
+                className="bg-white shadow-2xl rounded-2xl max-w-md w-full p-8 space-y-6"
             >
                 <h2 className="text-3xl font-bold text-center text-gray-800">Welcome Back</h2>
                 {error && <p className="text-red-500 text-sm text-center">{error}</p>}
