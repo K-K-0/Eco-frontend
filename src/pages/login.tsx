@@ -31,7 +31,7 @@ export default function Login() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-green-50 to-blue-500 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-gradient-to-r from-green-200 to-blue-500 flex items-center justify-center p-4">
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
