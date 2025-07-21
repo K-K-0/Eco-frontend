@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { Mail, User, Info, Pencil } from "lucide-react";
+import NavBar from "../components/NavBar";
 
 interface ProfileType {
     username: string;
@@ -39,7 +40,9 @@ const Profile = () => {
         );
 
     return (
+        
         <div className="min-h-screen flex items-center justify-center px-4 bg-[#121212] text-white">
+            <NavBar/>
             <motion.div
                 initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
