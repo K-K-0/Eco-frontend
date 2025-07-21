@@ -8,7 +8,7 @@ const NavBar = () => {
     const closeMenu = () => setOpen(false);
 
     return (
-        <header className="fixed top-0 left-0 w-full z-50 bg-[#fdfce8] dark:bg-[#1c1f24] shadow-md backdrop-blur-lg transition-all">
+        <header className="fixed top-0 left-0 w-full z-50 bg-black dark:bg-[#1c1f24] shadow-md backdrop-blur-lg transition-all">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
                 <a
                     href="/dashboard"
@@ -57,7 +57,7 @@ const NavBar = () => {
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.25 }}
-                        className="md:hidden bg-black dark:bg-[#22262c] shadow-inner"
+                        className="md:hidden bg-[#fdfce8] dark:bg-[#22262c] shadow-inner"
                     >
                         <div className="px-4 pb-4 pt-2 flex flex-col gap-3 text-lg font-medium text-[#002d1f] dark:text-gray-100">
                             <NavLink to="/posts" onClick={closeMenu} mobile>Posts</NavLink>
