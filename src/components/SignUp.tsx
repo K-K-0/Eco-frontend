@@ -36,7 +36,6 @@ const SignUp = ({
   loginText = "Already have an account?",
   loginUrl = "http://localhost:5173/login",
 }: Signup2Props) => {
-
   const [form, setForm] = useState({ username: "", email: "", password: "" });
   const [, setError] = useState("");
   const navigate = useNavigate();
@@ -59,18 +58,17 @@ const SignUp = ({
   };
 
   return (
-    <section className="min-h-screen bg-muted flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <section className="min-h-screen bg-neutral-950 text-neutral-100 flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center space-y-3">
-          {/* Logo */}
           <a href={logo.url}>
             <img src={logo.src} alt={logo.alt} title={logo.title} className="mx-auto h-12" />
           </a>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{heading}</h1>
-          <p className="text-sm text-muted-foreground">{subheading}</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-neutral-100">{heading}</h1>
+          <p className="text-sm text-neutral-400">{subheading}</p>
         </div>
 
-        <div className="bg-white rounded-lg shadow px-6 py-8 space-y-6">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-lg shadow px-6 py-8 space-y-6">
           <form onSubmit={Submit} className="space-y-5">
             <div>
               <Label htmlFor="email">Email</Label>
@@ -82,6 +80,7 @@ const SignUp = ({
                 required
                 value={form.email}
                 onChange={HandleChanges}
+                className="bg-neutral-800 text-neutral-100 placeholder-neutral-500 border-neutral-700"
               />
             </div>
             <div>
@@ -94,6 +93,7 @@ const SignUp = ({
                 required
                 value={form.username}
                 onChange={HandleChanges}
+                className="bg-neutral-800 text-neutral-100 placeholder-neutral-500 border-neutral-700"
               />
             </div>
             <div>
@@ -106,31 +106,32 @@ const SignUp = ({
                 required
                 value={form.password}
                 onChange={HandleChanges}
+                className="bg-neutral-800 text-neutral-100 placeholder-neutral-500 border-neutral-700"
               />
             </div>
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
               {signupText}
             </Button>
           </form>
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300" />
+              <div className="w-full border-t border-neutral-700" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="bg-white px-2 text-muted-foreground">or</span>
+              <span className="bg-neutral-900 px-2 text-neutral-400">or</span>
             </div>
           </div>
 
-          <Button className="w-full flex items-center justify-center gap-2" variant="outline">
+          <Button className="w-full flex items-center justify-center gap-2 bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-neutral-100">
             <FcGoogle className="text-xl" />
             {googleText}
           </Button>
         </div>
 
-        <p className="mt-4 text-center text-sm text-muted-foreground">
+        <p className="mt-4 text-center text-sm text-neutral-400">
           {loginText}
-          <a href={loginUrl} className="ml-1 font-medium text-primary hover:underline">
+          <a href={loginUrl} className="ml-1 font-medium text-green-500 hover:underline">
             Login
           </a>
         </p>
