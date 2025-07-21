@@ -32,10 +32,7 @@ const Profile = () => {
         fetchProfile();
     }, []);
 
-    if (!profile)
-        return (
-           <div></div>
-        );
+ 
 
     return (
         
@@ -51,19 +48,20 @@ const Profile = () => {
                 <div className="flex flex-col items-center text-center">
                     <img
                         src={
-                            profile.avatarUrl ||
-                            `https://api.dicebear.com/7.x/thumbs/svg?seed=${profile.username}`
+                            profile
+                                ? profile.avatarUrl || `https://api.dicebear.com/7.x/thumbs/svg?seed=${profile.username}`
+                                : `https://api.dicebear.com/7.x/thumbs/svg?seed=default`
                         }
                         alt="avatar"
                         className="w-24 h-24 rounded-full object-cover border-2 border-sky-500 shadow-md"
                     />
                     <h2 className="mt-4 text-2xl font-semibold flex items-center gap-2 text-sky-300">
                         <User className="w-5 h-5 text-sky-400" />
-                        @{profile.username}
+                        @{profile ? profile.username : "loading"}
                     </h2>
                     <p className="text-sm text-gray-400 flex items-center gap-2">
                         <Mail className="w-4 h-4 text-sky-400" />
-                        {profile.email}
+                        {profile ? profile.email : "loading"}
                     </p>
                 </div>
 
@@ -74,7 +72,7 @@ const Profile = () => {
                         About Me
                     </h3>
                     <p className="text-sm text-gray-300">
-                        {profile.bio || "No bio yet — just chillin' ✌️"}
+                        {profile && profile.bio ? profile.bio : "No bio yet — just chillin' ✌️"}
                     </p>
                 </div>
 
