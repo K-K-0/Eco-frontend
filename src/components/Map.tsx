@@ -191,7 +191,6 @@ const Map = () => {
                     </button>
                     <OrgCard
                         org={selectedOrg}
-                        onClose={() => setSelectedOrg(null)}
                     />
                 </div>
             )}
