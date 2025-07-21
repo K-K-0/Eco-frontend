@@ -37,7 +37,7 @@ const OrgForm = () => {
             );
             alert("Organization is created");
         } catch (err) {
-            console.log(err);
+            console.log(err)
             alert("Error registering organization");
         }
     };
