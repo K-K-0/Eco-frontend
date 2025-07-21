@@ -45,8 +45,8 @@ const OrgCard = ({ org }: { org: orgType; onClose?: () => void }) => {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.4 }}
             className="relative w-[90%] max-w-sm sm:max-w-md mx-auto p-6 rounded-3xl 
-             bg-gray-100 dark:bg-gray-900 
-             shadow-xl border border-gray-300 dark:border-gray-700"
+             bg-zinc-100 dark:bg-zinc-900 
+             shadow-xl border border-black-300 dark:border-gray-700"
         >
           
 
@@ -60,8 +60,8 @@ const OrgCard = ({ org }: { org: orgType; onClose?: () => void }) => {
                     onClick={toggleFollow}
                     className={`px-4 py-2 rounded-full text-sm font-semibold shadow-md transition duration-300 ease-in-out
       ${isFollowing
-                            ? "bg-gray-700 hover:bg-gray-800 text-white"
-                            : "bg-gray-900 hover:bg-black text-white"
+                            ? "bg-white-700 hover:bg-gray-800 text-black"
+                            : "bg-white-900 hover:bg-black text-black"
                         }`}
                 >
                     {isFollowing ? "Unfollow" : "Follow"}
