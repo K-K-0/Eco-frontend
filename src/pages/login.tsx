@@ -38,7 +38,7 @@ export default function Login() {
                 transition={{ duration: 0.5 }}
                 className="bg-black shadow-2xl rounded-2xl w-full max-w-md p-6 sm:p-8 space-y-6"
             >
-                <h2 className="text-3xl font-bold text-center text-white">Welcome Back</h2>
+                <h2 className="text-3xl font-bold text-center text-white">Welcome Back    </h2>
                 {error && <p className="text-red-400 text-sm text-center">{error}</p>}
 
                 <form onSubmit={handleLogin} className="space-y-4">
