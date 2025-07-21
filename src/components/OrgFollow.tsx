@@ -44,17 +44,11 @@ const OrgCard = ({ org }: { org: orgType; onClose?: () => void }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.4 }}
-            className="relative w-[90%] max-w-sm sm:max-w-md mx-auto p-6 rounded-3xl bg-gradient-to-br from-purple-100 via-pink-100 to-blue-100 dark:from-purple-900 dark:via-pink-900 dark:to-blue-900 shadow-xl border border-purple-300 dark:border-purple-700"
+            className="relative w-[90%] max-w-sm sm:max-w-md mx-auto p-6 rounded-3xl 
+             bg-gray-100 dark:bg-gray-900 
+             shadow-xl border border-gray-300 dark:border-gray-700"
         >
-            {/* Close Button */}
-            {/* {onClose && (
-                <button
-                    onClick={onClose}
-                    className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white text-xl font-bold"
-                >
-                    ✕
-                </button>
-            )} */}
+          
 
             {/* Org Name and Follow Button */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -65,13 +59,14 @@ const OrgCard = ({ org }: { org: orgType; onClose?: () => void }) => {
                 <button
                     onClick={toggleFollow}
                     className={`px-4 py-2 rounded-full text-sm font-semibold shadow-md transition duration-300 ease-in-out
-                        ${isFollowing
-                            ? "bg-pink-500 hover:bg-pink-600 text-white"
-                            : "bg-blue-500 hover:bg-blue-600 text-white"
+      ${isFollowing
+                            ? "bg-gray-700 hover:bg-gray-800 text-white"
+                            : "bg-gray-900 hover:bg-black text-white"
                         }`}
                 >
                     {isFollowing ? "Unfollow" : "Follow"}
                 </button>
+
             </div>
 
             {/* Org Description */}
