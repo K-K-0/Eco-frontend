@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import CommentSection from "../components/comments";
-import Loader from "../components/loader";
 import NavBar from "../components/NavBar";
 
 
