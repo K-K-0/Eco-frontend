@@ -59,12 +59,11 @@ const Feed = () => {
     }, []);
 
     if (loading) return (
-        <div className="flex justify-center items-center min-h-screen">
+        <div className="flex justify-center items-center min-h-screen bg-neutral-900">
             <Loader />
         </div>
     );
 
-    
     const handleLike = async (postId: string) => {
         try {
             const BASE_URL = import.meta.env.VITE_BACKEND_URL;
@@ -87,7 +86,6 @@ const Feed = () => {
         }
     };
 
-    
     const handleComment = async (postId: string) => {
         if (!comment.trim()) return;
         try {
@@ -107,94 +105,65 @@ const Feed = () => {
     };
 
     return (
-        <div className="min-h-screen bg-sky-50 dark:bg-neutral-900">
-            
+        <div className="min-h-screen bg-neutral-900 text-neutral-100">
             <NavBar />
-
-            
-            <div
-                className="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8 py-28 md:py-32 space-y-8"
-            >
+            <div className="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8 py-28 md:py-32 space-y-8">
                 {feeds.length === 0 && (
-                    <p className="text-center text-gray-500 dark:text-gray-400">
-                        No Post Yet
-                    </p>
+                    <p className="text-center text-neutral-400">No Post Yet</p>
                 )}
 
                 {feeds.map((feed) => (
                     <article
                         key={feed.id}
-                        className="bg-white dark:bg-neutral-800 shadow-md rounded-2xl p-5 sm:p-6 space-y-4"
+                        className="bg-neutral-800 border border-neutral-700 shadow-lg rounded-2xl p-5 sm:p-6 space-y-4 transition-all duration-200 hover:shadow-2xl"
                     >
-                
                         <header className="flex items-center gap-3">
                             <img
                                 src={feed.user.avatarUrl || "/default-avatar.png"}
                                 alt="avatar"
-                                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border"
+                                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border border-neutral-600"
                             />
                             <div>
-                                <p className="font-semibold text-sm sm:text-base text-neutral-800 dark:text-neutral-100">
-                                    {feed.user.username}
-                                </p>
-                                <time
-                                    className="text-xs text-neutral-500 dark:text-neutral-400"
-                                    dateTime={feed.createdAt}
-                                >
+                                <p className="font-semibold text-sm sm:text-base">{feed.user.username}</p>
+                                <time className="text-xs text-neutral-400" dateTime={feed.createdAt}>
                                     {new Date(feed.createdAt).toLocaleString()}
                                 </time>
                             </div>
                         </header>
 
-                        {/* Content */}
-                        <p className="text-sm sm:text-base leading-relaxed whitespace-pre-wrap text-neutral-700 dark:text-neutral-200">
+                        <p className="text-sm sm:text-base leading-relaxed whitespace-pre-wrap text-neutral-200">
                             {feed.content}
                         </p>
 
-                        
                         {feed.mediaUrl && (
                             <div className="w-full max-h-[60vh] overflow-hidden rounded-xl">
                                 {feed.mediaUrl.endsWith(".mp4") ? (
-                                    <video
-                                        controls
-                                        src={feed.mediaUrl}
-                                        className="w-full h-full object-contain"
-                                    />
+                                    <video controls src={feed.mediaUrl} className="w-full h-full object-contain rounded-xl" />
                                 ) : feed.mediaUrl.endsWith(".svg") ? (
-                                    <object
-                                        data={feed.mediaUrl}
-                                        type="image/svg+xml"
-                                        className="w-full h-full object-contain"
-                                    />
+                                    <object data={feed.mediaUrl} type="image/svg+xml" className="w-full h-full object-contain rounded-xl" />
                                 ) : (
-                                    <img
-                                        src={feed.mediaUrl}
-                                        alt="Post visual"
-                                        className="w-full h-full object-cover"
-                                    />
+                                    <img src={feed.mediaUrl} alt="Post visual" className="w-full h-full object-cover rounded-xl" />
                                 )}
                             </div>
                         )}
 
-                        
                         <div className="flex items-center gap-4 pt-2">
                             <button
                                 onClick={() => handleLike(feed.id)}
-                                className="flex items-center gap-1 text-sm font-medium text-red-500 hover:scale-105 transition-transform"
+                                className="flex items-center gap-1 text-sm font-medium text-red-400 hover:text-red-500 hover:scale-105 transition-transform"
                             >
                                 {feed.like.some((l) => l.userId === currentUserId) ? "❤️" : "🤍"}
                                 <span>{feed.like.length}</span>
                             </button>
                         </div>
 
-                    
                         <div className="space-y-2">
                             <input
                                 type="text"
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)}
                                 placeholder="Add a comment…"
-                                className="w-full rounded-lg border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-sm bg-white/60 dark:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                                className="w-full rounded-lg border border-neutral-700 px-3 py-2 text-sm bg-neutral-700 text-neutral-100 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-green-500"
                             />
                             <button
                                 onClick={() => handleComment(feed.id)}
@@ -205,7 +174,6 @@ const Feed = () => {
                             </button>
                         </div>
 
-                        
                         <CommentSection postId={feed.id} />
                     </article>
                 ))}
