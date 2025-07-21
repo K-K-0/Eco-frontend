@@ -65,8 +65,8 @@ const Profile = () => {
 
                 <div className="border-t border-white/10 pt-4">
                     <h3 className="text-lg font-semibold mb-2 text-violet-300 flex items-center gap-2">
-                        <Info className="w-5 h-5 text-violet-400" />
-                        About Me
+            
+                        Bio
                     </h3>
                     <p className="text-sm text-gray-300">
                         {profile.bio || "No bio yet — but vibes are immaculate ⚡"}
