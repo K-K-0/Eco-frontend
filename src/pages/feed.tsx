@@ -35,7 +35,7 @@ type FeedType = {
 
 const Feed = () => {
     const [feeds, setFeeds] = useState<FeedType[]>([]);
-    const [loading, setLoading] = useState(true);
+    
     const auth = useAuth();
     const user = auth?.user;
     const currentUserId = user?.id;
@@ -50,16 +50,12 @@ const Feed = () => {
                 setFeeds(Array.isArray(res.data.feeds) ? res.data.feeds : res.data || []);
             } catch (error) {
                 console.log(error);
-            } finally {
-                setLoading(false);
-            }
+            } 
         };
         fetchFeed();
     }, []);
 
-    if (loading) return (
-      <div></div>
-    );
+   
 
     const handleLike = async (postId: string) => {
         try {
