@@ -84,13 +84,23 @@ const Map = () => {
 
     
     useEffect(() => {
+        
         if (!map.current || orgs.length === 0) return;
+        const handleMapClick = () => setSelectedOrg(null);
+        map.current.on("click", handleMapClick);
+
+
         orgs.forEach((org) => {
+
+            
+
             const el = document.createElement("div");
             el.className = "custom-org-marker";
             el.title = org.name;
 
-            el.addEventListener("click", () => setSelectedOrg(org));
+            el.addEventListener("click", (e) => { 
+                e.stopPropagation(); 
+                setSelectedOrg(org)});
 
             new maplibregl.Marker({ element: el, anchor: "bottom" })
                 .setLngLat([org.longitude, org.latitude])
