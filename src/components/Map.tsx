@@ -181,10 +181,20 @@ const Map = () => {
 
     
             {selectedOrg && (
-                   <OrgCard
-                        org={selectedOrg}
-                    />
-                
+                <div
+                    className="
+                                fixed 
+                                bottom-6 lg:top-28 lg:bottom-auto 
+                                left-1/2 lg:left-8 
+                                -translate-x-1/2 lg:translate-x-0 
+                                w-[90%] sm:w-[22rem] lg:w-[20rem] 
+                                max-w-full 
+                                z-50
+                            "
+                >
+                    <OrgCard org={selectedOrg} />
+                </div>
+
             )}
         </div>
     );
