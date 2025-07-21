@@ -2,7 +2,7 @@ import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
-import { Mail, User, Info, Pencil } from "lucide-react"; // GenZ style icons
+import { Mail, User, Pencil } from "lucide-react"; // GenZ style icons
 
 interface ProfileType {
     username: string;
