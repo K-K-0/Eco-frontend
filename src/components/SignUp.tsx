@@ -23,13 +23,13 @@ interface Signup2Props {
 }
 
 const SignUp = ({
-  heading = "Signup",
-  subheading = "Create a new account",
+  heading = "Sign Up",
+  subheading = "Create a new account to get started",
   logo = {
     url: "#",
     src: "https://shadcnblocks.com/images/block/block-1.svg",
-    alt: "logo",
-    title: "#",
+    alt: "Logo",
+    title: "App Logo",
   },
   googleText = "Sign up with Google",
   signupText = "Create an account",
@@ -37,110 +37,103 @@ const SignUp = ({
   loginUrl = "http://localhost:5173/login",
 }: Signup2Props) => {
 
-  const [form, setForm] = useState({ username: "", email: "", password: "" })
-  const [, setError] = useState("")
-  const navigate = useNavigate()
-
+  const [form, setForm] = useState({ username: "", email: "", password: "" });
+  const [, setError] = useState("");
+  const navigate = useNavigate();
 
   const HandleChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const Submit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError("")
+    e.preventDefault();
+    setError("");
 
     try {
-      const BASE_URL = import.meta.env.VITE_BACKEND_URL
-      await axios.post(`${BASE_URL}/api/auth/register`, form, { withCredentials: true })
-      navigate('/login')
+      const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+      await axios.post(`${BASE_URL}/api/auth/register`, form, { withCredentials: true });
+      navigate('/login');
     } catch (error) {
-      console.log(error)
+      console.error(error);
     }
-  }
-
-
+  };
 
   return (
-    <section className="h-screen bg-muted">
-      <div className="flex h-full items-center justify-center">
-        <div className="flex w-full max-w-sm flex-col items-center gap-y-8">
-          <div className="flex flex-col items-center gap-y-2">
-            {/* Logo */}
-            <div className="flex items-center gap-1 lg:justify-start">
-              <a href="#">
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  title={logo.title}
-                  className="h-12"
-                />
-              </a>
-            </div>
-            <h1 className="text-3xl font-semibold">{heading}</h1>
-            <p className="text-sm text-muted-foreground">{subheading}</p>
-          </div>
-          <div className="flex w-full flex-col gap-8 rounded-md border border-muted bg-white px-6 py-12 shadow-md">
-            <form onSubmit={Submit}>
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col gap-2">
-                  <Label>Email</Label>
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="Enter your email"
-                    required
-                    className="bg-white"
-                    value={form.email}
-                    onChange={HandleChanges}
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label>Username</Label>
-                  <Input
-                    type="username"
-                    name="username"
-                    placeholder="Enter your username"
-                    required
-                    className="bg-white"
-                    value={form.username}
-                    onChange={HandleChanges}
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label>Password</Label>
-                  <Input
-                    type="password"
-                    name="password"
-                    placeholder="Enter your password"
-                    required
-                    className="bg-white"
-                    value={form.password}
-                    onChange={HandleChanges}
-                  />
-                </div>
-                <div className="flex flex-col gap-4">
-                  <Button type="submit" className="mt-2 w-full">
-                    {signupText}
-                  </Button>
-                  <Button className="w-full">
-                    <FcGoogle className="mr-2 size-5" />
-                    {googleText}
-                  </Button>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div className="flex justify-center gap-1 text-sm text-muted-foreground">
-            <p>{loginText}</p>
-            <a
-              href={loginUrl}
-              className="font-medium text-primary hover:underline"
-            >
-              login
-            </a>
-          </div>
+    <section className="min-h-screen bg-muted flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md space-y-8">
+        <div className="text-center space-y-3">
+          {/* Logo */}
+          <a href={logo.url}>
+            <img src={logo.src} alt={logo.alt} title={logo.title} className="mx-auto h-12" />
+          </a>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{heading}</h1>
+          <p className="text-sm text-muted-foreground">{subheading}</p>
         </div>
+
+        <div className="bg-white rounded-lg shadow px-6 py-8 space-y-6">
+          <form onSubmit={Submit} className="space-y-5">
+            <div>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+                value={form.email}
+                onChange={HandleChanges}
+              />
+            </div>
+            <div>
+              <Label htmlFor="username">Username</Label>
+              <Input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="Choose a username"
+                required
+                value={form.username}
+                onChange={HandleChanges}
+              />
+            </div>
+            <div>
+              <Label htmlFor="password">Password</Label>
+              <Input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+                value={form.password}
+                onChange={HandleChanges}
+              />
+            </div>
+            <Button type="submit" className="w-full">
+              {signupText}
+            </Button>
+          </form>
+
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300" />
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="bg-white px-2 text-muted-foreground">or</span>
+            </div>
+          </div>
+
+          <Button className="w-full flex items-center justify-center gap-2" variant="outline">
+            <FcGoogle className="text-xl" />
+            {googleText}
+          </Button>
+        </div>
+
+        <p className="mt-4 text-center text-sm text-muted-foreground">
+          {loginText}
+          <a href={loginUrl} className="ml-1 font-medium text-primary hover:underline">
+            Login
+          </a>
+        </p>
       </div>
     </section>
   );
