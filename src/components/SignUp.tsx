@@ -19,7 +19,7 @@ interface Signup2Props {
   signupText?: string;
   googleText?: string;
   loginText?: string;
-  loginUrl?: ``;
+  loginUrl?: `http://localhost:5173/login`;
 }
 
 const SignUp = ({
