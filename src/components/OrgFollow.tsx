@@ -10,7 +10,7 @@ type orgType = {
     followers: { id: number }[];
 };
 
-const OrgCard = ({ org, onClose }: { org: orgType; onClose?: () => void }) => {
+const OrgCard = ({ org }: { org: orgType; onClose?: () => void }) => {
     const user = useAuth()?.user;
     const [isFollowing, setIsFollowing] = useState(false);
 
