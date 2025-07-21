@@ -59,9 +59,7 @@ const Feed = () => {
     }, []);
 
     if (loading) return (
-        <div className="flex justify-center items-center min-h-screen bg-neutral-900">
-            <Loader />
-        </div>
+      <div></div>
     );
 
     const handleLike = async (postId: string) => {
