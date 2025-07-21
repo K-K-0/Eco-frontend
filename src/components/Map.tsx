@@ -182,13 +182,7 @@ const Map = () => {
     
             {selectedOrg && (
                 <div className="fixed bottom-6 lg:bottom-auto lg:top-28 left-1/2 lg:left-8 -translate-x-1/2 lg:translate-x-0 w-[calc(100%-2rem)] sm:w-96 lg:w-80 max-w-sm bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow z-40">
-                    <button
-                        onClick={() => setSelectedOrg(null)}
-                        className="absolute top-2 right-2 text-gray-600 hover:text-red-500"
-                        title="Close organization card"
-                    >
-                        <X size={20} />
-                    </button>
+                    
                     <OrgCard
                         org={selectedOrg}
                     />
