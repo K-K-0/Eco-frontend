@@ -62,6 +62,6 @@ const OrgCard = ({ org }: { org: orgType }) => {
             </p>
         </div>
     );
-};
+}
 
 export default OrgCard;
