@@ -47,14 +47,14 @@ const OrgCard = ({ org, onClose }: { org: orgType; onClose?: () => void }) => {
             className="relative w-[90%] max-w-sm sm:max-w-md mx-auto p-6 rounded-3xl bg-gradient-to-br from-purple-100 via-pink-100 to-blue-100 dark:from-purple-900 dark:via-pink-900 dark:to-blue-900 shadow-xl border border-purple-300 dark:border-purple-700"
         >
             {/* Close Button */}
-            {onClose && (
+            {/* {onClose && (
                 <button
                     onClick={onClose}
                     className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white text-xl font-bold"
                 >
                     ✕
                 </button>
-            )}
+            )} */}
 
             {/* Org Name and Follow Button */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
