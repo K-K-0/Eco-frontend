@@ -57,7 +57,7 @@ const NavBar = () => {
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.25 }}
-                        className="md:hidden bg-[#fdfce8] dark:bg-[#22262c] shadow-inner"
+                        className="md:hidden bg-black dark:bg-[#22262c] shadow-inner"
                     >
                         <div className="px-4 pb-4 pt-2 flex flex-col gap-3 text-lg font-medium text-[#002d1f] dark:text-gray-100">
                             <NavLink to="/posts" onClick={closeMenu} mobile>Posts</NavLink>
