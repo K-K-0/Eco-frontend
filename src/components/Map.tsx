@@ -179,7 +179,10 @@ const Map = () => {
                     >
                         <X size={20} />
                     </button>
-                    <OrgCard org={selectedOrg} />
+                    <OrgCard
+                        org={selectedOrg}
+                        onClose={() => setSelectedOrg(null)}
+                    />
                 </div>
             )}
         </div>
