@@ -4,7 +4,6 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import axios from "axios";
 import NavBar from "./NavBar";
 import OrgCard from "./OrgFollow";
-import { X } from "lucide-react";
 
 const MAPTILER_KEY = "bs0qTCbmXadT9ZH0pr9h";
 
@@ -182,7 +181,7 @@ const Map = () => {
     
             {selectedOrg && (
                 <div className="fixed bottom-6 lg:bottom-auto lg:top-28 left-1/2 lg:left-8 -translate-x-1/2 lg:translate-x-0 w-[calc(100%-2rem)] sm:w-96 lg:w-80 max-w-sm bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow z-40">
-                    
+
                     <OrgCard
                         org={selectedOrg}
                     />
