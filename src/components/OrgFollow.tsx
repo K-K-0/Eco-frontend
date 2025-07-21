@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
 
 type orgType = {
@@ -9,7 +10,7 @@ type orgType = {
     followers: { id: number }[];
 };
 
-const OrgCard = ({ org }: { org: orgType }) => {
+const OrgCard = ({ org, onClose }: { org: orgType; onClose?: () => void }) => {
     const user = useAuth()?.user;
     const [isFollowing, setIsFollowing] = useState(false);
 
@@ -37,31 +38,47 @@ const OrgCard = ({ org }: { org: orgType }) => {
         }
     };
 
-    if (!org) return <div>Organization data not found.</div>;
-
     return (
-        <div className="w-full max-w-md mx-auto p-5 mb-6 rounded-2xl shadow-xl bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-700 transition-all">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
+        <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.3 }}
+            className="relative w-full max-w-xs p-4 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700"
+        >
+            {/* Close Button */}
+            {onClose && (
+                <button
+                    onClick={onClose}
+                    className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white"
+                >
+                    ✕
+                </button>
+            )}
+
+            {/* Org Name and Follow */}
+            <div className="flex items-center justify-between gap-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                     {org.name}
-                </h3>
+                </h2>
 
                 <button
                     onClick={toggleFollow}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${isFollowing
+                    className={`px-3 py-1 text-sm rounded-lg font-medium transition-colors ${isFollowing
                             ? "bg-red-500 hover:bg-red-600 text-white"
-                            : "bg-green-600 hover:bg-green-700 text-white"
+                            : "bg-green-500 hover:bg-green-600 text-white"
                         }`}
                 >
                     {isFollowing ? "Unfollow" : "Follow"}
                 </button>
             </div>
 
-            <p className="mt-4 text-gray-700 dark:text-gray-300 text-sm leading-relaxed bg-gray-100 dark:bg-gray-800 p-4 rounded-xl">
-                {org.description}
+            {/* Org Description */}
+            <p className="mt-3 text-gray-700 dark:text-gray-300 text-sm rounded-lg bg-gray-100 dark:bg-gray-800 p-3">
+                {org.description || "No description available."}
             </p>
-        </div>
-    )
-}
+        </motion.div>
+    );
+};
 
 export default OrgCard;
