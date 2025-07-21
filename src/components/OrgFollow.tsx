@@ -45,35 +45,32 @@ const OrgCard = ({ org }: { org: orgType; onClose?: () => void }) => {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.4 }}
             className="relative w-[90%] max-w-sm sm:max-w-md mx-auto p-6 rounded-3xl 
-             bg-zinc-100 dark:bg-zinc-900 
-             shadow-xl border border-black-300 dark:border-gray-700"
+             bg-black text-white 
+             shadow-xl border border-gray-800"
         >
-          
-
             {/* Org Name and Follow Button */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    {org.name}
-                </h2>
+                <h2 className="text-2xl font-bold">{org.name}</h2>
 
                 <button
                     onClick={toggleFollow}
                     className={`px-4 py-2 rounded-full text-sm font-semibold shadow-md transition duration-300 ease-in-out
-      ${isFollowing
-                            ? "bg-white-700 hover:bg-gray-800 text-black"
-                            : "bg-white-900 hover:bg-black text-black"
+        ${isFollowing
+                            ? "bg-gray-700 hover:bg-gray-600 text-white"
+                            : "bg-gray-900 hover:bg-gray-800 text-white"
                         }`}
                 >
                     {isFollowing ? "Unfollow" : "Follow"}
                 </button>
-
             </div>
 
             {/* Org Description */}
-            <p className="mt-4 text-sm text-gray-800 dark:text-gray-200 leading-relaxed rounded-lg bg-white/70 dark:bg-black/30 p-4 shadow-inner backdrop-blur">
+            <p className="mt-4 text-sm text-gray-200 leading-relaxed rounded-lg 
+                bg-gray-900 p-4 shadow-inner">
                 {org.description || "No description available."}
             </p>
         </motion.div>
+
     );
 };
 
