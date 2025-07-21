@@ -3,7 +3,7 @@ import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import axios from "axios";
 import NavBar from "./NavBar";
-import OrgCard from "./OrgFollow";
+// import OrgCard from "./OrgFollow";
 
 
 const MAPTILER_KEY = "bs0qTCbmXadT9ZH0pr9h";
