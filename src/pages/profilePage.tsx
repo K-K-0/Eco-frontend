@@ -34,9 +34,7 @@ const Profile = () => {
 
     if (!profile)
         return (
-            <div className="text-center mt-10 text-gray-400 text-lg tracking-wide animate-pulse">
-                Loading your profile...
-            </div>
+           <div></div>
         );
 
     return (
