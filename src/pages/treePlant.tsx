@@ -10,7 +10,7 @@ const Plant = () => {
     const [imageUrl, setImageUrl] = useState("");
 
     const handlePlant = async (e: React.FormEvent) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
             const BASE_URL = import.meta.env.VITE_BACKEND_URL;
             const tree = await axios.post(`${BASE_URL}/api/plant`, {
