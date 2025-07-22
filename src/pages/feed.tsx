@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import CommentSection from "../components/comments";
 import NavBar from "../components/NavBar";
+import { motion } from "framer-motion";
+import { Heart, HeartCrack } from "lucide-react";
 
 
 type CommentType = {
@@ -35,7 +37,7 @@ type FeedType = {
 
 const Feed = () => {
     const [feeds, setFeeds] = useState<FeedType[]>([]);
-    
+
     const auth = useAuth();
     const user = auth?.user;
     const currentUserId = user?.id;
@@ -50,12 +52,10 @@ const Feed = () => {
                 setFeeds(Array.isArray(res.data.feeds) ? res.data.feeds : res.data || []);
             } catch (error) {
                 console.log(error);
-            } 
+            }
         };
         fetchFeed();
     }, []);
-
-   
 
     const handleLike = async (postId: string) => {
         try {
@@ -98,38 +98,41 @@ const Feed = () => {
     };
 
     return (
-        <div className="min-h-screen bg-neutral-900 text-neutral-100">
+        <div className="min-h-screen bg-neutral-950 text-white">
             <NavBar />
-            <div className="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8 py-28 md:py-32 space-y-8">
+            <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 py-28 md:py-32 space-y-10">
                 {feeds.length === 0 && (
-                    <p className="text-center text-neutral-400">No Post Yet</p>
+                    <p className="text-center text-neutral-500">No Post Yet</p>
                 )}
 
                 {feeds.map((feed) => (
-                    <article
+                    <motion.article
                         key={feed.id}
-                        className="bg-neutral-800 border border-neutral-700 shadow-lg rounded-2xl p-5 sm:p-6 space-y-4 transition-all duration-200 hover:shadow-2xl"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4 }}
+                        className="bg-neutral-900 border border-neutral-800 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-4 sm:p-6 space-y-5"
                     >
-                        <header className="flex items-center gap-3">
+                        <header className="flex items-center gap-4">
                             <img
                                 src={feed.user.avatarUrl || "/default-avatar.png"}
                                 alt="avatar"
-                                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border border-neutral-600"
+                                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-neutral-700"
                             />
                             <div>
                                 <p className="font-semibold text-sm sm:text-base">{feed.user.username}</p>
-                                <time className="text-xs text-neutral-400" dateTime={feed.createdAt}>
+                                <time className="text-xs text-neutral-500" dateTime={feed.createdAt}>
                                     {new Date(feed.createdAt).toLocaleString()}
                                 </time>
                             </div>
                         </header>
 
-                        <p className="text-sm sm:text-base leading-relaxed whitespace-pre-wrap text-neutral-200">
+                        <p className="text-sm sm:text-base leading-relaxed whitespace-pre-wrap text-neutral-300">
                             {feed.content}
                         </p>
 
                         {feed.mediaUrl && (
-                            <div className="w-full max-h-[60vh] overflow-hidden rounded-xl">
+                            <div className="w-full max-h-[60vh] overflow-hidden rounded-xl border border-neutral-800">
                                 {feed.mediaUrl.endsWith(".mp4") ? (
                                     <video controls src={feed.mediaUrl} className="w-full h-full object-contain rounded-xl" />
                                 ) : feed.mediaUrl.endsWith(".svg") ? (
@@ -141,34 +144,39 @@ const Feed = () => {
                         )}
 
                         <div className="flex items-center gap-4 pt-2">
-                            <button
+                            <motion.button
+                                whileTap={{ scale: 1.2 }}
                                 onClick={() => handleLike(feed.id)}
-                                className="flex items-center gap-1 text-sm font-medium text-red-400 hover:text-red-500 hover:scale-105 transition-transform"
+                                className="flex items-center gap-2 text-red-500 hover:text-red-400 transition-colors text-sm"
                             >
-                                {feed.like.some((l) => l.userId === currentUserId) ? "❤️" : "🤍"}
+                                {feed.like.some((l) => l.userId === currentUserId) ? (
+                                    <Heart fill="currentColor" className="w-5 h-5" />
+                                ) : (
+                                    <HeartCrack className="w-5 h-5" />
+                                )}
                                 <span>{feed.like.length}</span>
-                            </button>
+                            </motion.button>
                         </div>
 
-                        <div className="space-y-2">
+                        <div className="space-y-3">
                             <input
                                 type="text"
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)}
-                                placeholder="Add a comment…"
-                                className="w-full rounded-lg border border-neutral-700 px-3 py-2 text-sm bg-neutral-700 text-neutral-100 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                placeholder="Say something..."
+                                className="w-full rounded-xl border border-neutral-800 bg-neutral-800 px-4 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-green-500"
                             />
                             <button
                                 onClick={() => handleComment(feed.id)}
                                 disabled={posting}
-                                className="bg-green-600 hover:bg-green-700 disabled:opacity-60 text-white text-sm px-4 py-2 rounded-lg transition-colors w-full sm:w-auto"
+                                className="bg-gradient-to-tr from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 disabled:opacity-50 text-white text-sm px-4 py-2 rounded-xl transition-all"
                             >
                                 {posting ? "Posting…" : "Post"}
                             </button>
                         </div>
 
                         <CommentSection postId={feed.id} />
-                    </article>
+                    </motion.article>
                 ))}
             </div>
         </div>
