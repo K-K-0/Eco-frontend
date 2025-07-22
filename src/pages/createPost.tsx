@@ -40,7 +40,7 @@ const CreatePost = () => {
             console.log(error);
             alert("Something went wrong");
         } finally {
-            setLoading(false);
+            setLoading(false)
         }
     };
 
