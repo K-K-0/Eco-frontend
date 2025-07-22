@@ -30,7 +30,7 @@ function App() {
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/addOrg" element={<Protected><OrgForm /></Protected>} />
           <Route path="/Hello" element={<SetLocation />} />
-          <Route path="/posts" element={<Protected><Feed currentUserId={"yourCurrentUserId"} /></Protected>} />
+          <Route path="/posts" element={<Protected><Feed /></Protected>} />
           <Route path="/profile" element={<Protected><Profile /></Protected>} />
           <Route path="/signup" element={<SignUp logo={{
             url: "",
