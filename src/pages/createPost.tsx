@@ -48,7 +48,7 @@ const CreatePost = () => {
         <div className="min-h-screen bg-gradient-to-br from-neutral-900 to-neutral-800 text-neutral-100">
             <NavBar />
 
-            <div className="px-4 sm:px-6 lg:px-8 pt-28 pb-12 lg:pt-32 lg:pb-20 max-w-2xl md:max-w-3xl lg:max-w-5xl mx-auto">
+            <div className="px-4 sm:px-6 lg:px-8 pt-28 pb-12 lg:pt-32 lg:pb-20 max-w-2xl md:max-w-2xl lg:max-w-5xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
