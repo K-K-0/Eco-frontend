@@ -36,7 +36,7 @@ const Feed = ({ currentUserId }: { currentUserId: string }) => {
             }
         };
         fetchFeeds();
-    }, []);
+    }, [BASE_URL]);
 
     const handleLike = async (postId: string) => {
         try {
